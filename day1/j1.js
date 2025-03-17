@@ -4,7 +4,7 @@ var a={
     occupation:"business",
     "isPass":false,
     "year":null,
-    "address":{                                 // nesting of object
+    "address":{                                 // nesting of objects
         "city":"ahmedabad",
         "zip":"382350"
     },
@@ -18,3 +18,5 @@ console.log(a.subjects[0]);
 console.log(a.address);
 console.log(a.address.city);
 console.log(JSON.stringify(a));
+// Hello world
+// Hello amdavad
