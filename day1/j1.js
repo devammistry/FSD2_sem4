@@ -18,6 +18,3 @@ console.log(a.subjects[0]);
 console.log(a.address);
 console.log(a.address.city);
 console.log(JSON.stringify(a));
-// Hello world
-// Hello amdavad
-// hello gujarat
