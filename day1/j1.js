@@ -17,5 +17,5 @@ console.log(a["address"]["city"]);
 console.log(a.subjects[0]);
 console.log(a.address);
 console.log(a.address.city);
-console.log(JSON.stringify(a));
+console.log(JSON.stringify(a));                 // stringify only key ne string ma convert karse
 // hello guys
