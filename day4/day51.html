@@ -1,0 +1,63 @@
+<!-- <html>
+<body>
+    <p id="p1">Hello</p>
+    <button onclick="inc()">Inc</button>
+    <button onclick="dec()">Dec</button>
+    <button onclick="stop()">stop</button>
+
+    <script>
+        font=50;
+        function fun() {
+            document.getElementById("p1").style.fontsize=font+"px";
+        }
+        function inc() {
+            test=setInterval(function() {
+                if(font<100) {
+                    fun(++font);
+                }
+            }, 1000);
+        }
+        function dec() {
+            test=setInterval(function() {
+                if(font>15) {
+                    fun(--font);
+                }
+            }, 1000);
+        }
+        function stop() {
+            clearInterval(test);
+        }
+    </script>
+</body>
+</html> -->
+
+<html>
+    <body>
+        <p id="p1">Hello</p>
+        <button onclick="inc()">Inc</button>
+        <button onclick="stop()">stop</button>
+        <button onclick="dec()">Dec</button>
+        <script>
+            font = 50;
+            function fun(){
+                document.getElementById("p1").style.fontSize = font + "px";
+            }
+            function inc(){
+                test = setInterval(function(){
+                    if(font<100){
+                        fun(++font);
+                    }
+                },1000);
+            }
+            function dec(){
+                test = setInterval(function(){
+                    if(font>15){
+                        fun(--font);
+                }},1000);
+            }
+            function stop(){
+                clearInterval(test);
+            }
+        </script>
+    </body>
+</html>
