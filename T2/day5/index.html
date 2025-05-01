@@ -1,0 +1,34 @@
+<html>
+
+<body>
+    <form action="/submit-feedback" method="POST">
+        Name:
+        <input type="text" name="name">
+        <br><br>
+
+        Email:
+        <input type="email" name="email" maxlength="20">
+        <br><br>
+
+        Message:
+        <textarea name="message"></textarea>
+        <br><br>
+
+        Rating:
+        <input type="radio" id="rating1" name="rating" value="Bad" required>
+        <label for="rating1">Bad</label>
+        <input type="radio" id="rating2" name="rating" value="Average" required>
+        <label for="rating2">Average</label>
+        <input type="radio" id="rating3" name="rating" value="Good" required>
+        <label for="rating3">Good</label>
+        <input type="radio" id="rating4" name="rating" value="Very Good" required>
+        <label for="rating4">Very Good</label>
+        <input type="radio" id="rating5" name="rating" value="Excellent" required>
+        <label for="rating5">Excellent</label>
+        <br><br>
+
+        <input type="submit">
+    </form>
+</body>
+
+</html>
