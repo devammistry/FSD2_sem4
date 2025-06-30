@@ -1,0 +1,131 @@
+C:\Users\LJENG>mongosh
+Current Mongosh Log ID: 68622f65bd4950c688ce6b5a
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.10.3
+Using MongoDB:          6.0.8
+Using Mongosh:          1.10.3
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2025-06-23T16:05:08.208+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+test> show dbs
+JD                72.00 KiB
+admin             40.00 KiB
+config            72.00 KiB
+employee          72.00 KiB
+ipe               40.00 KiB
+lj                40.00 KiB
+local            112.00 KiB
+login             40.00 KiB
+mydb             348.00 KiB
+reactconnect      72.00 KiB
+reactconnection   40.00 KiB
+ss               276.00 KiB
+test             184.00 KiB
+test> use admin
+switched to db admin
+admin> use state
+switched to db state
+state> use test
+switched to db test
+test> db.createCollection("student")
+{ ok: 1 }
+test> db.student.insertOne({name:"devam",age:19})
+{
+  acknowledged: true,
+  insertedId: ObjectId("686233c4bd4950c688ce6b5b")
+}
+test> db.student.insertMany({name:"N1", age:21}, {name:"N2"}, {name:"N3", gender:"MALE"})
+MongoInvalidArgumentError: Argument "docs" must be an array of documents
+test> db.student.insertMany([{name:"N1", age:21}, {name:"N2"}, {name:"N3", gender:"MALE"}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("6862357dbd4950c688ce6b5c"),
+    '1': ObjectId("6862357dbd4950c688ce6b5d"),
+    '2': ObjectId("6862357dbd4950c688ce6b5e")
+  }
+}
+test> db.student.insertMany([{name:"Meet", salary:21000, city:"pune", pincode:382350, gender:"rather not to say"}])
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("68623788bd4950c688ce6b5f") }
+}
+test> db.student.insertMany([{name:"Meet", salary:21000, city:"pune", pincode:382350, gender:"rather not to say"}])
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("686237abbd4950c688ce6b60") }
+}
+test> db.student.insertMany([{name:"Meet", salary:21000, city:"pune", pincode:382350, gender:"rather not to say"}])
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("686237aebd4950c688ce6b61") }
+}
+test> db.student.insertMany([{name:"Meet", salary:21000, city:"pune", pincode:382350, gender:"rather not to say"}])
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("686237afbd4950c688ce6b62") }
+}
+test> db.student.insertMany([{name:"Meet", salary:21000, city:"pune", pincode:382350, gender:"rather not to say"}])
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("686237b0bd4950c688ce6b63") }
+}
+test> db.student.updateOne({name:"N1"}, {$set:{name:"N78"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+test> db.student.updateOne({name:"N78", age:21}, {$set:{name:"N79"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+test> db.student.updateMany({name:"Meet"}, {$set:{name:"lalo"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 2,
+  modifiedCount: 2,
+  upsertedCount: 0
+}
+test> db.student.updateMany({$set:{age:21}})
+MongoInvalidArgumentError: Update document requires atomic operators
+test> db.student.updateMany({},{$set:{age:21}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 10,
+  modifiedCount: 9,
+  upsertedCount: 0
+}
+test> db.student.find({name:"lalo"})
+[
+  {
+    _id: ObjectId("68623788bd4950c688ce6b5f"),
+    name: 'lalo',
+    salary: 21000,
+    city: 'pune',
+    pincode: 382350,
+    gender: 'Female',
+    age: 21
+  },
+  {
+    _id: ObjectId("686237abbd4950c688ce6b60"),
+    name: 'lalo',
+    salary: 21000,
+    city: 'pune',
+    pincode: 382350,
+    gender: 'Female',
+    age: 21
+  }
+]
