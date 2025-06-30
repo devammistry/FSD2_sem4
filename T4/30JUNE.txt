@@ -129,3 +129,36 @@ test> db.student.find({name:"lalo"})
     age: 21
   }
 ]
+test> db.student.find({name:"lalo"},{city})
+ReferenceError: city is not defined
+test> db.student.find({name:"lalo"},{city:1})
+[
+  { _id: ObjectId("68623788bd4950c688ce6b5f"), city: 'pune' },
+  { _id: ObjectId("686237abbd4950c688ce6b60"), city: 'banglore' }
+]
+test> db.student.find({name:"lalo"},{city:1, _id:0})
+[ { city: 'pune' }, { city: 'banglore' } ]
+test> db.student.find({name:"lalo"},{city:1, name:0})
+MongoServerError: Cannot do exclusion on field name in inclusion projection
+test> db.student.findOne({name:"lalo"})
+{
+  _id: ObjectId("68623788bd4950c688ce6b5f"),
+  name: 'lalo',
+  salary: 21000,
+  city: 'pune',
+  pincode: 382350,
+  gender: 'Female',
+  age: 21
+}
+test> db.student.find({name:"lalo"}).limit(1)
+[
+  {
+    _id: ObjectId("68623788bd4950c688ce6b5f"),
+    name: 'lalo',
+    salary: 21000,
+    city: 'pune',
+    pincode: 382350,
+    gender: 'Female',
+    age: 21
+  }
+]
