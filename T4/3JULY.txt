@@ -1,0 +1,70 @@
+1. update one doc with branch "CSE" age 21 where age is 5
+db.student.updateOne({age:5}, {$set:{branch:"CSE", age:21}})
+
+2. display all docs where age is 21
+db.student.find({age:21})
+
+3. display city of docs where city is surat
+db.student.find({city:"surat"}, {city:1, _id:0})
+
+4. display names of 5 students where grade is 10
+db.student.find({grade:10}, {name:1, _id:0}).limit(5)
+
+--- comparison operators:
+$eq
+$gte
+$lte
+$ne
+$gt
+$lt
+$in
+$nin
+
+db.student.find({age:{$gte:20}})
+db.student.find({age:{$in:[21,33]}})       is age 21 or 31?
+
+--- logical operators:
+$and
+$or
+$not
+$nor
+
+db.student.find({$and:[{age:21},{position:"developer"}]})
+db.student.find({$or:[{branch:"IT"}, {gender:"Male"}, {age:21}]})
+
+--- field update operators:
+$set
+$inc
+$mul
+$unset
+
+{ $unset: { obsoleteField: "" } }
+This deletes obsoleteField from the document. The value is ignored but must be included.
+
+db.student.updateMany({}, {$inc: {age:5}})
+
+increase salary by 5%
+db.student.updateMany({}, {$mul: {salary:1.05}})
+
+display name, enrollnum of student scoring highest marks
+db.student.find({}, {name:1, enrollnum:1, _id:0}).sort({marks:-1}).limit(1)
+
+db.student.count({age:21})
+
+--- regex
+https://chat.aidemos.com/
+
+substring abc
+db.student.find({name:{$regex: /abc/ }})
+
+in the end should be abc
+db.student.find({name:{$regex: /abc$/ }})
+
+at the start should be abc
+db.student.find({name:{$regex: /^abc/ }})
+
+start with digit
+db.student.find({name:{$regex: /^[0-9]/ }})
+
+only digits should be accept
+db.student.find({name:{$regex: /^[0-9]$/ }})
