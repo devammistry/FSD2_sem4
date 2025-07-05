@@ -1,0 +1,79 @@
+1. SELECT * FROM lju
+--- db.lju.find({})
+
+2. SELECT name, status FROM lju
+--- db.lju.find({}, {name:1, status:1, _id:0})
+
+3. SELECT * FROM lju WHERE status!="A"
+--- db.lju.find({status:{$ne:"A"}})
+
+4. SELECT * FROM lju WHERE status="A" AND age=50
+--- db.lju.find({$and:[{status:"A"},{age:50}]})
+
+5. SELECT * FROM lju WHERE age>25 AND age<=50
+--- db.lju.find({$and:[{age:{$gt:25}},{age:{$lte:50}}]})
+
+6. SELECT name FROM lju WHERE name like %abc%
+--- db.lju.find({name:{$regex: /abc/ }}, {name:1, _id:0})
+
+7. ALTER TABLE lju DROP COLUMN join-date
+--- db.lju.updateMany({},{ $unset: { join-date:"" } })
+
+8. DROP TABLE lju
+--- db.lju.drop()
+
+9. ALTER TABLE lju ADD join-date DATETIME
+--- db.lju.updateMany({},{$set:{join-date:new Date()}})
+
+10. INSERT INTO lju(name, age, status) VALUES("TEST", 45, "A")
+--- db.lju.insertMany([{name:"TEST", age:45, status:"A"}])
+--- db.lju.insertOne({name:"TEST", age:45, status:"A"})
+
+11. SELECT * FROM lju WHERE status="A" ORDER BY age DESC
+--- db.lju.find({status:"A"}).sort({age:-1})
+
+12. SELECT COUNT(*) FROM lju where age>30
+--- db.lju.count({$gt:{age:30}})
+--- db.lju.find({$gt:{age:30}}).count()
+
+13. SELECT * FROM lju LIMIT 2 OFFSET 3
+--- db.lju.find().limit(2).skip(3)
+
+14. UPDATE lju SET status="c" where age>25
+--- db.lju.updateMany({$gt:{age:25}}, {status:"c"})
+
+15. UPDATE lju SET age=age+3 where status="A"
+--- db.lju.updateMany({status:"A"}, {$inc:{age:3}})
+
+16. SELECT * FROM lju WHERE name NOT IN("aaa", "bbc", "ca")
+--- db.lju.find({name:{%nin:["aaa", "bbc", "ca"]}})
+
+17. SELECT name FROM lju WHERE age IN(20,23,33)
+--- db.lju.find({age:{%in:[20,23,33]}}, {name:1, _id:0})
+
+--- not sql que.
+18. give 5% raise to all "Data scientists"
+--- db.emp.updateMany({designation:"Data scientists"}, {$mul: {salary:1.05}})
+
+19. retrieve name of employee with highest salary
+--- db.emp.find({}, {name:1, _id:0}).sort(salary:-1).limit(1)
+--- db.emp.findOne({}, {name:1, _id:0}).sort(salary:-1)
+
+20. retrieve name of employees whose age is greater than equal to 25 and less than or equal to 40
+--- db.emp.find({$and:[{$gte:{age:25}},{$lte:{age:40}}]},{name:1, _id:0})
+
+21. retrieve employees who are either "soft dev" or "Full stack" and are below 30 years.
+--- db.emp.find({}, {$and:[{$or:[{designation:"soft dev"},{designation:"Full stack"}]},{age:{$lt:30}}]})
+
+22. increase salary of emp whose salary less than 50000 by 10%
+--- db.emp.updateMany({salary:{$lt:50000}}, {$mul:{salary:1.1}})
+
+23. find documents where name like "%ric%"
+--- db.emp.find({name:{$regex: /ric/ }})
+
+24. find doc where name like "Eri_ _"
+--- db.emp.find({name:{$regex: /^Eri[A-Z a-z]{2}/ }})
+
+25. find doc where name contains only 4 or 5 letters
+--- db.emp.find($or:[{name:{$regex: /^[A-Z a-z]{4}$/}},{name:{$regex: /^[A-Z a-z]{5}$/}}])
+--- db.emp.find({name:{$regex: /^[A-Z a-z]{4,5}$/}})
